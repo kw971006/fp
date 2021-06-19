@@ -6,6 +6,7 @@ let amplitudes;
 let amplitudev;
 let amplitudeb;
 let amplitudeg;
+let value = 0;
 var colors = ["#0B3954","#BFD7EA","#FF6663","#E0FF4F","#048A81"]
 
 function preload(){
@@ -27,12 +28,7 @@ function preload(){
 function setup() {
   createCanvas(679, 345);
   fft = new p5.FFT();
-  sd.play();
-  d.play();
-  g.play();
-  v.play();
-  b.play();
-  s.play();
+  
   
   amplitude = new p5.Amplitude();
   amplitude.setInput(sd);
@@ -120,6 +116,20 @@ function draw() {
         rotate(radians(frameCount+125));
 		ellipse(width/20,height/20, 60+level*50, 60+level*50);
         pop();
+}
+function mousePressed(){
+  if(value === 0) {
+  sd.play();
+  d.play();
+  g.play();
+  v.play();
+  b.play();
+  s.play();
+  value = 1;
+  } 
+  else {
+    value = 0;
+  }
 }
 
 function stated(){
