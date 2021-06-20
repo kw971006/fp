@@ -1,5 +1,5 @@
 let img;
-let sd, d, s, v, b, g;
+let sd, d, s, v, b, g, g2;
 let amplitude;
 let amplituded;
 let amplitudes;
@@ -11,7 +11,8 @@ var colors = ["#0B3954","#BFD7EA","#FF6663","#E0FF4F","#048A81"]
 
 function preload(){
   img = loadImage('stage.png');
-  sd = loadSound('mr.mp3');
+  sd = loadSound('song.mp3');
+  g2 = loadSound('mr.mp3');
   d = loadSound('drum.mp3');
   s = loadSound('solo.mp3');
   v = loadSound('vocal.mp3');
@@ -24,6 +25,7 @@ function preload(){
   ddg = loadImage('drumg.png');
   bbg = loadImage('bassg.png');
   ggg = loadImage('guitarg.png');
+  g2.disconnect();d.disconnect();g.disconnect();b.disconnect();s.disconnect();v.disconnect();
 }
 function setup() {
   createCanvas(679, 345);
@@ -32,6 +34,8 @@ function setup() {
   
   amplitude = new p5.Amplitude();
   amplitude.setInput(sd);
+  amplitudeg2 = new p5.Amplitude();
+  amplitudeg2.setInput(g2);
   amplituded = new p5.Amplitude();
   amplituded.setInput(d);
   amplitudes = new p5.Amplitude();
@@ -42,6 +46,7 @@ function setup() {
   amplitudeb.setInput(b);
   amplitudeg = new p5.Amplitude();
   amplitudeg.setInput(g);
+  
 }
 
 function draw() {
@@ -120,19 +125,38 @@ function draw() {
 function mousePressed(){
   if(value === 0) {
   sd.play();
+    
+  g2.play();
   d.play();
   g.play();
   v.play();
   b.play();
   s.play();
-  value = 1;
-  } 
-  else {
-    value = 0;
+    
   }
 }
-
-function stated(){
-  let lvd = amplituded.getLevel();
+function mousePressed() {
+  if (sd.isPlaying()) {
+    
+    
+  sd.stop();
+    
+  g2.stop();
+  d.stop();
+  g.stop();
+  v.stop();
+  b.stop();
+  s.stop();
+    
   
+  } else {
+    sd.play();
+    sd.setVolume(0.5);
+    g2.play();
+  d.play();
+  g.play();
+  v.play();
+  b.play();
+  s.play();
+  }
 }
